@@ -19,8 +19,8 @@ public class UserService {
     }
 
     public User finByid(Long id){
-        Optional<User> userId = repository.findById( id );
-        return userId.get();
+        Optional<User> obj = repository.findById( id );
+        return obj.get();
     }
 
 }

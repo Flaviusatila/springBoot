@@ -1,6 +1,7 @@
 package com.iftm.course.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.iftm.course.entities.enums.OrderStatus;
 
 import javax.persistence.*;
 import java.time.Instant;
@@ -16,15 +17,19 @@ public class Order {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd 'T' HH:mm:ss 'Z'", timezone = "GMT")
     private Instant moment;
 
+    private Integer orderStatus;
+
     @ManyToOne
     @JoinColumn(name = "client_id")
     private User client;
 
-    public Order(Long id, Instant moment,User user) {
+
+    public Order(Long id, Instant moment, User user, OrderStatus orderStatus) {
         super();
         this.id = id;
         this.moment = moment;
         this.client = user;
+        setOrderStatus( orderStatus );
     }
 
     public Order() {
@@ -57,6 +62,16 @@ public class Order {
     public void setClient(User client) {
         this.client = client;
     }
+
+    public OrderStatus getOrderStatus() {
+        return OrderStatus.valueOf( orderStatus);
+    }
+
+    public void setOrderStatus(OrderStatus orderStatus) {
+        if (orderStatus != null)
+        this.orderStatus = orderStatus.getCode();
+    }
+
 
     public boolean equals(final Object o) {
         if (o == this) return true;
