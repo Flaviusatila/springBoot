@@ -3,6 +3,7 @@ package com.iftm.course.entities;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.iftm.course.entities.enums.OrderStatus;
+import org.aspectj.weaver.ast.Or;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -96,6 +97,14 @@ public class Order implements Serializable {
 
     public void setPayment(Payment payment) {
         this.payment = payment;
+    }
+
+    public Double getTotal(){
+        double sum = 0.0;
+        for (OrderIten x : itens){
+            sum += x.getSubTotal();
+        }
+        return sum;
     }
 
     public boolean equals(final Object o) {
