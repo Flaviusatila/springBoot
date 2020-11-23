@@ -16,7 +16,7 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY )
     private Long id;
-    private String nome;
+    private String name;
     private String email;
     private String phone;
     private String password;
@@ -25,9 +25,9 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "client")
     private List<Order> orders = new ArrayList<>();
 
-    public User(Long id, String nome, String email, String phone, String password) {
+    public User(Long id, String name, String email, String phone, String password) {
         this.id = id;
-        this.nome = nome;
+        this.name = name;
         this.email = email;
         this.phone = phone;
         this.password = password;
@@ -45,8 +45,8 @@ public class User implements Serializable {
         return this.id;
     }
 
-    public String getNome() {
-        return this.nome;
+    public String getName() {
+        return this.name;
     }
 
     public String getEmail() {
@@ -69,8 +69,8 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setEmail(String email) {
@@ -97,9 +97,9 @@ public class User implements Serializable {
         final Object this$id = this.getId();
         final Object other$id = other.getId();
         if (this$id == null ? other$id != null : !this$id.equals( other$id )) return false;
-        final Object this$nome = this.getNome();
-        final Object other$nome = other.getNome();
-        if (this$nome == null ? other$nome != null : !this$nome.equals( other$nome )) return false;
+        final Object this$name = this.getName();
+        final Object other$name = other.getName();
+        if (this$name == null ? other$name != null : !this$name.equals( other$name )) return false;
         final Object this$email = this.getEmail();
         final Object other$email = other.getEmail();
         if (this$email == null ? other$email != null : !this$email.equals( other$email )) return false;
@@ -120,8 +120,8 @@ public class User implements Serializable {
         int result = 1;
         final Object $id = this.getId();
         result = result * PRIME + ($id == null ? 43 : $id.hashCode());
-        final Object $nome = this.getNome();
-        result = result * PRIME + ($nome == null ? 43 : $nome.hashCode());
+        final Object $name = this.getName();
+        result = result * PRIME + ($name == null ? 43 : $name.hashCode());
         final Object $email = this.getEmail();
         result = result * PRIME + ($email == null ? 43 : $email.hashCode());
         final Object $phone = this.getPhone();
@@ -134,6 +134,6 @@ public class User implements Serializable {
     }
 
     public String toString() {
-        return "User(id=" + this.getId() + ", nome=" + this.getNome() + ", email=" + this.getEmail() + ", phone=" + this.getPhone() + ", password=" + this.getPassword() + ", orders=" + this.getOrders() + ")";
+        return "User(id=" + this.getId() + ", name=" + this.getName() + ", email=" + this.getEmail() + ", phone=" + this.getPhone() + ", password=" + this.getPassword() + ", orders=" + this.getOrders() + ")";
     }
 }
