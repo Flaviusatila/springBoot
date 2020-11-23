@@ -1,14 +1,8 @@
 package com.iftm.course.config;
 
-import com.iftm.course.entities.Category;
-import com.iftm.course.entities.Order;
-import com.iftm.course.entities.Product;
-import com.iftm.course.entities.User;
+import com.iftm.course.entities.*;
 import com.iftm.course.entities.enums.OrderStatus;
-import com.iftm.course.repository.CategoryRepository;
-import com.iftm.course.repository.OrderRepository;
-import com.iftm.course.repository.ProductRepository;
-import com.iftm.course.repository.UserRepository;
+import com.iftm.course.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +10,6 @@ import org.springframework.context.annotation.Profile;
 
 import java.time.Instant;
 import java.util.Arrays;
-import java.util.Set;
 
 @Configuration
 @Profile( "test" )
@@ -33,6 +26,9 @@ public class TestConfig implements CommandLineRunner {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private OrderItenRepository orderItenRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -69,6 +65,19 @@ public class TestConfig implements CommandLineRunner {
 
         userRepository.saveAll( Arrays.asList( u1,u2 ) );
         orderRepository.saveAll( Arrays.asList( o1,o2,o3 ) );
+
+        OrderIten oi1 = new OrderIten(o1, p1, 2, p1.getPrice());
+        OrderIten oi2 = new OrderIten(o1, p3, 1, p3.getPrice());
+        OrderIten oi3 = new OrderIten(o2, p3, 2, p3.getPrice());
+        OrderIten oi4 = new OrderIten(o3, p5, 2, p5.getPrice());
+
+        orderItenRepository.saveAll( Arrays.asList( oi1,oi2,oi3,oi4 ) );
+
+        Payment pay1 = new Payment(null,Instant.parse("2019-06-23T13:02:55Z"),o1);
+        o1.setPayment( pay1 );
+
+        orderRepository.save( o1 );
+
     }
 
 
