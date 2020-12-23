@@ -1,5 +1,7 @@
 package com.iftm.course.resources;
 
+import com.iftm.course.dto.UserDTO;
+import com.iftm.course.dto.UserInsertDTO;
 import com.iftm.course.entities.User;
 import com.iftm.course.repository.UserRepository;
 import com.iftm.course.service.UserService;
@@ -27,28 +29,28 @@ public class UserResource {
 //    }
 
     @GetMapping
-    public ResponseEntity<List<User>> findAll(){
-        List<User> list = service.findAll();
-        return ResponseEntity.ok().body( list );
+    public ResponseEntity<List<UserDTO>> findAll(){
+        List<UserDTO> listDto = service.findAll();
+        return ResponseEntity.ok().body( listDto );
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> finById(@PathVariable Long id ){
-        User user = service.finByid( id );
-        return ResponseEntity.ok().body( user );
+    public ResponseEntity<UserDTO> finById(@PathVariable Long id ){
+        UserDTO dto = service.finByid( id );
+        return ResponseEntity.ok().body( dto );
     }
 
 
     @PostMapping
-    public ResponseEntity<User> insert(@RequestBody User obj){
-        obj = service.insert( obj );
+    public ResponseEntity<UserDTO> insert(@RequestBody UserInsertDTO dto){
+        UserDTO newDto = service.insert( dto );
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path( "/{id}")
-                .buildAndExpand( obj.getId() )
+                .buildAndExpand( newDto.getId() )
                 .toUri();
 
-        return ResponseEntity.created(uri).body( obj );
+        return ResponseEntity.created(uri).body( newDto );
     }
 
     @DeleteMapping(value = "/{id}")
@@ -58,9 +60,9 @@ public class UserResource {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<User> update(@PathVariable Long id,@RequestBody User obj){
-        obj = service.update( id,obj );
-        return ResponseEntity.ok().body( obj );
+    public ResponseEntity<UserDTO> update(@PathVariable Long id,@RequestBody UserDTO dto){
+        dto = service.update( id,dto );
+        return ResponseEntity.ok().body( dto );
     }
 
 }
