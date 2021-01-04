@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -43,9 +44,17 @@ public class ProductResource {
         return ResponseEntity.created(uri).body( newDto );
     }
 
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        service.delete( id );
+        return ResponseEntity.noContent().build();
+    }
+
     @PutMapping(value = "/{id}")
     public ResponseEntity<ProductDTO> update(@PathVariable Long id, @RequestBody ProductCategoryDTO dto){
         ProductDTO newDto = service.update( id,dto );
         return ResponseEntity.ok().body( newDto );
     }
+
+
 }

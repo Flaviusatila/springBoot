@@ -7,8 +7,11 @@ import com.iftm.course.entities.Category;
 import com.iftm.course.entities.Product;
 import com.iftm.course.repository.CategoryRepository;
 import com.iftm.course.repository.ProductRepository;
+import com.iftm.course.service.exceptions.DataBaseException;
 import com.iftm.course.service.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -44,6 +47,17 @@ public class ProductService implements Serializable {
         setProductCategories(entity,dto.getCategories());
         entity = productRepository.save( entity );
         return new ProductDTO(entity) ;
+    }
+
+    public void delete(Long id){
+        try{
+            productRepository.deleteById( id );
+        }catch (EmptyResultDataAccessException e){
+            throw new ResourceNotFoundException( id );
+        }catch (DataIntegrityViolationException e ){
+            throw new DataBaseException( e.getMessage() );
+        }
+
     }
 
     @Transactional

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.jws.soap.SOAPBinding;
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -42,7 +43,7 @@ public class UserResource {
 
 
     @PostMapping
-    public ResponseEntity<UserDTO> insert(@RequestBody UserInsertDTO dto){
+    public ResponseEntity<UserDTO> insert(@RequestBody @Valid UserInsertDTO dto){
         UserDTO newDto = service.insert( dto );
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
