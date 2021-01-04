@@ -13,13 +13,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class UserService {
+public class UserService implements Serializable {
 
+    private static final long serialVersionUID = 8082511670115556352L;
     @Autowired
     private UserRepository repository;
 

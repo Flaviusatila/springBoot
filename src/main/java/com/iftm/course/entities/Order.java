@@ -1,9 +1,6 @@
 package com.iftm.course.entities;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.iftm.course.entities.enums.OrderStatus;
-import org.aspectj.weaver.ast.Or;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -14,13 +11,14 @@ import java.util.Set;
 @Entity
 @Table(name = "tb_order")
 public class Order implements Serializable {
-    private static final long serialVersionUID = 1L;
+
+
+    private static final long serialVersionUID = 2427988136947317999L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd 'T' HH:mm:ss 'Z'", timezone = "GMT")
     private Instant moment;
 
     private Integer orderStatus;
@@ -35,6 +33,7 @@ public class Order implements Serializable {
 
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
     private Payment payment;
+
 
 
     public Order(Long id, Instant moment, User user, OrderStatus orderStatus) {
@@ -56,7 +55,6 @@ public class Order implements Serializable {
         return this.id;
     }
 
-//    @JsonIgnore
     public Set<OrderIten> getItens() {
         return itens;
     }
@@ -90,7 +88,6 @@ public class Order implements Serializable {
         this.orderStatus = orderStatus.getCode();
     }
 
-    @JsonIgnore
     public Payment getPayment() {
         return payment;
     }

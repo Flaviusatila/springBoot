@@ -1,6 +1,5 @@
 package com.iftm.course.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.iftm.course.entities.pk.OrderItenPK;
 
 import javax.persistence.EmbeddedId;
@@ -12,7 +11,8 @@ import java.util.Objects;
 @Entity
 @Table(name = "tb_order_item")
 public class OrderIten implements Serializable {
-    private static final long serialVersionUID = 1L;
+
+    private static final long serialVersionUID = 5944348645114298456L;
 
     @EmbeddedId
     private OrderItenPK id = new OrderItenPK();
@@ -31,7 +31,6 @@ public class OrderIten implements Serializable {
     public OrderIten() {
     }
 
-    @JsonIgnore
     public Order getOrder(){
         return id.getOrder();
     }

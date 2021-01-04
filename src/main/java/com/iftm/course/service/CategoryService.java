@@ -15,13 +15,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.NotSupportedException;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class CategoryService {
+public class CategoryService implements Serializable {
 
+    private static final long serialVersionUID = 2589717477811714609L;
     @Autowired
     private CategoryRepository repository;
 
@@ -41,7 +43,7 @@ public class CategoryService {
         try{
             Category obj = dto.toEntity();
             repository.save( obj );
-            return dto;
+            return new CategoryDTO(obj);
         }catch (Exception e){
             throw new ResourceNotFoundException( e );
         }
@@ -64,7 +66,7 @@ public class CategoryService {
             Category entity = repository.getOne( id );
             updateData( entity , dto );
             repository.save( entity );
-            return dto;
+            return new CategoryDTO(entity);
         }catch (EntityNotFoundException e){
             throw new ResourceNotFoundException( id );
         }

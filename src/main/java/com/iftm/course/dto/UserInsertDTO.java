@@ -2,7 +2,11 @@ package com.iftm.course.dto;
 
 import com.iftm.course.entities.User;
 
-public class UserInsertDTO {
+import java.io.Serializable;
+
+public class UserInsertDTO implements Serializable {
+
+    private static final long serialVersionUID = 7882198300147481340L;
 
     private Long id;
     private String name;

@@ -2,7 +2,11 @@ package com.iftm.course.dto;
 
 import com.iftm.course.entities.Category;
 
-public class CategoryDTO {
+import java.io.Serializable;
+
+public class CategoryDTO implements Serializable {
+
+    private static final long serialVersionUID = -4176705358012266387L;
 
     private Long id;
     private String name;

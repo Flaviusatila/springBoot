@@ -1,44 +1,39 @@
 package com.iftm.course.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.iftm.course.entities.Product;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
-public class ProductDTO implements Serializable {
+public class ProductCategoryDTO implements Serializable {
 
-    private static final long serialVersionUID = 7664452710404648753L;
+    private static final long serialVersionUID = 1426463318337766739L;
 
-    private Long id;
     private String name;
     private String description;
     private Double price;
     private String imgUrl;
 
-    public ProductDTO() {
+    @JsonProperty("categories")
+    private List<CategoryDTO> categories = new ArrayList<>();
+
+    public ProductCategoryDTO() {
     }
 
-    public ProductDTO(Long id, String name, String description, Double price, String imgUrl) {
-        this.id = id;
+    public ProductCategoryDTO(String name, String description, Double price, String imgUrl) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.imgUrl = imgUrl;
     }
 
-    public ProductDTO(Product entity){
-        this.id = entity.getId();
+    public ProductCategoryDTO(Product entity) {
         this.name = entity.getName();
         this.description = entity.getDescription();
         this.price = entity.getPrice();
         this.imgUrl = entity.getImgUrl();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -73,7 +68,11 @@ public class ProductDTO implements Serializable {
         this.imgUrl = imgUrl;
     }
 
+    public List<CategoryDTO> getCategories() {
+        return categories;
+    }
+
     public Product toEntity(){
-        return new Product(id,name,description,price,imgUrl);
+        return new Product(null,name,description,price,imgUrl);
     }
 }

@@ -1,7 +1,5 @@
 package com.iftm.course.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -11,7 +9,8 @@ import java.util.Set;
 @Entity
 @Table(name = "tb_product")
 public class Product implements Serializable {
-    private static final long serialVersionUID = 1L;
+
+    private static final long serialVersionUID = -1140730976507585722L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -67,7 +66,7 @@ public class Product implements Serializable {
         return this.categories;
     }
 
-    @JsonIgnore
+
     public Set<Order> getOrders() {
         Set<Order> set = new HashSet<>();
         for (OrderIten x : itens){

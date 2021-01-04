@@ -1,15 +1,15 @@
 package com.iftm.course.resources;
 
+import com.iftm.course.dto.ProductCategoryDTO;
 import com.iftm.course.dto.ProductDTO;
-import com.iftm.course.entities.Product;
+import com.iftm.course.dto.UserDTO;
 import com.iftm.course.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -19,11 +19,6 @@ public class ProductResource {
     @Autowired
     private ProductService service;
 
-//    @GetMapping
-//    public ResponseEntity<Product> findAll(){
-//        Product user = new Product(1L,"Maria","maria@gmail.com","999999999","12345");
-//        return ResponseEntity.ok().body( user );
-//    }
 
     @GetMapping
     public ResponseEntity<List<ProductDTO>> findAll(){
@@ -37,5 +32,20 @@ public class ProductResource {
         return ResponseEntity.ok().body( obj );
     }
 
+    @PostMapping
+    public ResponseEntity<ProductDTO> insert(@RequestBody ProductCategoryDTO dto){
+        ProductDTO newDto = service.insert( dto );
+        URI uri = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path( "/{id}")
+                .buildAndExpand( newDto.getId() )
+                .toUri();
+        return ResponseEntity.created(uri).body( newDto );
+    }
 
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<ProductDTO> update(@PathVariable Long id, @RequestBody ProductCategoryDTO dto){
+        ProductDTO newDto = service.update( id,dto );
+        return ResponseEntity.ok().body( newDto );
+    }
 }

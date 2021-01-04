@@ -1,5 +1,6 @@
 package com.iftm.course.resources;
 
+import com.iftm.course.dto.OrderDTO;
 import com.iftm.course.entities.Order;
 import com.iftm.course.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,15 +26,15 @@ public class OrderResource {
 //    }
 
     @GetMapping
-    public ResponseEntity<List<Order>> findAll(){
-        List<Order> list = service.findAll();
+    public ResponseEntity<List<OrderDTO>> findAll(){
+        List<OrderDTO> list = service.findAll();
         return ResponseEntity.ok().body( list );
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Order> finById(@PathVariable Long id ){
-        Order obj = service.findById( id );
-        return ResponseEntity.ok().body( obj );
+    public ResponseEntity<OrderDTO> finById(@PathVariable Long id ){
+        OrderDTO dto = service.findById( id );
+        return ResponseEntity.ok().body( dto );
     }
 
 

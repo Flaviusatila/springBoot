@@ -1,7 +1,7 @@
 package com.iftm.course.entities.enums;
 
 
-public enum OrderStatus {
+public enum OrderStatus{
 
     WAITING_PAYMENT(1),
     PAID(2),

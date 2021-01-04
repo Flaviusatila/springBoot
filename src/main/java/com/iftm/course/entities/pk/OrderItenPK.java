@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Embeddable
 public class OrderItenPK implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -3719402142024902503L;
 
     @ManyToOne
     @JoinColumn(name = "order_id")
