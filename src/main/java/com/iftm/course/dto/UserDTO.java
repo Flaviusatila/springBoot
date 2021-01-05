@@ -1,16 +1,30 @@
 package com.iftm.course.dto;
 
 import com.iftm.course.entities.User;
+import com.iftm.course.service.validations.UserUpdateValid;
+import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
+@UserUpdateValid
 public class UserDTO implements Serializable {
 
     private static final long serialVersionUID = -5455982002017819112L;
 
     private Long id;
+
+    @NotEmpty(message = "Nao pode ser vazio o nome")
+    @Length(min = 5,max = 80, message = "O tamanho de ser entre 5 e 80 letras")
     private String name;
+
+    @NotEmpty(message = "Nao pode ser vazio o email")
+    @Email(message = "Problema na autenticação do email")
     private String email;
+
+    @NotEmpty(message = "Nao pode ser vazio o phone")
+    @Length(min = 8, max = 20, message = "O tamanho de ser entre 8 e 20 letras")
     private String phone;
 
     public UserDTO() {
