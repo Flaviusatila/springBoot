@@ -1,12 +1,14 @@
 package com.iftm.course.dto;
 
 import com.iftm.course.entities.User;
+import com.iftm.course.service.validations.UserInsertValid;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
+@UserInsertValid
 public class UserInsertDTO implements Serializable {
 
     private static final long serialVersionUID = 7882198300147481340L;
@@ -20,7 +22,12 @@ public class UserInsertDTO implements Serializable {
     @NotEmpty(message = "Nao pode ser vazio o email")
     @Email(message = "Problema na autenticação do email")
     private String email;
+
+    @NotEmpty(message = "Nao pode ser vazio o phone")
+    @Length(min = 8, max = 20, message = "O tamanho de ser entre 8 e 20 letras")
     private String phone;
+
+    @NotEmpty(message = "Nao pode ser vazio a senha")
     private String password;
 
     public UserInsertDTO() {
