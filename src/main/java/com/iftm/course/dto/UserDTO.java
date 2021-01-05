@@ -24,7 +24,7 @@ public class UserDTO implements Serializable {
     private String email;
 
     @NotEmpty(message = "Nao pode ser vazio o phone")
-    @Length(min = 8, max = 20, message = "O tamanho de ser entre 8 e 20 letras")
+    @Length(min = 8, max = 20, message = "O tamanho de ser entre 8 e 20 numeros")
     private String phone;
 
     public UserDTO() {
